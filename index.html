@@ -1797,16 +1797,7 @@
       href="https://handpickedberlin.com/xmlrpc.php?rsd"
     />
     <link rel="shortlink" href="https://handpickedberlin.com/?p=5776" />
-    <link
-      rel="alternate"
-      type="application/json+oembed"
-      href="https://handpickedberlin.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fhandpickedberlin.com%2Freport-on-berlin-salary-trends-survey-june-2023%2F"
-    />
-    <link
-      rel="alternate"
-      type="text/xml+oembed"
-      href="https://handpickedberlin.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fhandpickedberlin.com%2Freport-on-berlin-salary-trends-survey-june-2023%2F&amp;format=xml"
-    />
+
     <!-- HappyForms global container -->
     <script type="text/javascript">
       HappyForms = {};
@@ -2127,18 +2118,7 @@
                     >&nbsp;or even better; you can subscribe to my Berlin and careers-related
                     newsletter FOR FREE:
                   </p>
-                  <center>
-                    <iframe
-                      class="lazyloaded"
-                      data-src="https://handpickedberlin.substack.com/embed"
-                      width="480"
-                      height="100"
-                      style="border: 0px solid #eee; background: white"
-                      frameborder="0"
-                      scrolling="no"
-                      src="Berlin%20Salary%20Report%20How%20Do%20You%20Compare%20_files/embed.html"
-                    ></iframe>
-                  </center>
+
                   <p>
                     It’s almost impossible to produce all the relevant charts, so we created a
                     dashboard; this way, you can explore most of the data yourself. I am excited to
@@ -2264,24 +2244,47 @@
                     Most respondents (878) were&nbsp;<strong>based in Berlin</strong>, while 92
                     worked&nbsp;<strong>remotely</strong>&nbsp;for Berlin-based organisations.
                   </p>
-                  <figure class="wp-block-image">
-                    <a
-                      href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0e46627e-71d5-49aa-a563-a062a143e1af_1000x600.png"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      ><img
-                        decoding="async"
-                        class="lazyload"
-                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                        data-src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0e46627e-71d5-49aa-a563-a062a143e1af_1000x600.png"
-                        alt="Berlin Salary Trends Survey Chart 1" /><noscript
-                        ><img
-                          decoding="async"
-                          class="lazyload"
-                          src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0e46627e-71d5-49aa-a563-a062a143e1af_1000x600.png"
-                          alt="Berlin Salary Trends Survey Chart 1" /></noscript
-                    ></a>
-                  </figure>
+                  <style>
+                    .remote-question {
+                      display: flex;
+                      flex-wrap: wrap;
+                      gap: 20px;
+                      align-items: center;
+                    }
+                    [name="working"] {
+                      position: fixed;
+                      top: -9999px;
+                      left: -999px;
+                    }
+                    .working-remote-buttons-container {
+                      display: inline-flex;
+                      justify-content: space-around;
+                      gap: 20px;
+                      flex-grow: 1;
+                    }
+                    .working-remote-buttons {
+                      border: solid 1px grey;
+                      padding: 8px 12px;
+                      border-radius: 4px;
+                      cursor: pointer;
+                    }
+                    [name="working"]:checked + .working-remote-buttons {
+                      border-color: var(--global-color-9);
+                      color: var(--global-color-9);
+                      font-weight: 700;
+                    }
+                  </style>
+                  <p class="remote-question">
+                    Are you based on Berlin or working remotely?
+                    <span class="working-remote-buttons-container">
+                      <input type="radio" name="working" id="working-not-selected" checked />
+                      <input type="radio" name="working" id="working-berlin" />
+                      <label class="working-remote-buttons" for="working-berlin">Berlin</label>
+                      <input type="radio" name="working" id="working-remotely" />
+                      <label class="working-remote-buttons" for="working-remotely">Remote</label>
+                    </span>
+                  </p>
+                  <div id="working-remote-chart"></div>
                   <p>
                     Men were overrepresented; this has to do with the tech bias of my distribution
                     channels, especially on tech-oriented subreddits.&nbsp;
@@ -2927,17 +2930,7 @@
                       You can start the process by typing in your email:
                     </p>
                   </blockquote>
-                  <center>
-                    <iframe
-                      class="lazyload"
-                      data-src="https://handpickedberlin.substack.com/embed"
-                      width="480"
-                      height="320"
-                      style="border: 0px solid #eee; background: white"
-                      frameborder="0"
-                      scrolling="no"
-                    ></iframe>
-                  </center>
+
                   <p>Thank you so much! ❤️</p>
                   <h2 class="wp-block-heading" id="dashboard">
                     🧑🏻‍💻 Dashboard: explore the data yourself
@@ -2964,17 +2957,7 @@
                       needs time.
                     </p>
                   </blockquote>
-                  <center>
-                    <iframe
-                      class="lazyload"
-                      width="400"
-                      height="880"
-                      data-src="https://lookerstudio.google.com/embed/reporting/ebdf37d5-85c1-47fc-8270-af252b6eef1b/page/p_0mehv5zu7c"
-                      frameborder="0"
-                      style="border: 0"
-                      allowfullscreen=""
-                    ></iframe>
-                  </center>
+
                   <p></p>
                   <blockquote
                     class="wp-block-quote is-style-default has-base-2-background-color has-background"
@@ -2993,17 +2976,7 @@
                       >Contact me here.</a
                     >
                   </p>
-                  <center>
-                    <iframe
-                      class="lazyload"
-                      data-src="https://handpickedberlin.substack.com/embed"
-                      width="480"
-                      height="100"
-                      style="border: 0px solid #eee; background: white"
-                      frameborder="0"
-                      scrolling="no"
-                    ></iframe>
-                  </center>
+
                   <h2 class="wp-block-heading" id="resources">Resources &amp; Media</h2>
                   <ul>
                     <li>
