@@ -2609,31 +2609,41 @@
                       >Total Annual Gross Salary (before tax and deductions)</strong
                     >&nbsp;in the rest of the charts.&nbsp;
                   </p>
-                  <p>
-                    Before you dig into the dashboard, check this histogram for orientation where
-                    you stand:
+                  <style>
+                    .earning-question {
+                      display: flex;
+                      flex-wrap: wrap;
+                      gap: 20px;
+                      align-items: center;
+                    }
+                    #earning-input {
+                      width: 10em;
+                      appearance: textfield;
+                      padding-left: 33px;
+                    }
+                    #earning-input-wrapper {
+                      position: relative;
+                    }
+                    #earning-input-wrapper:before {
+                      content: "€";
+                      position: absolute;
+                      top: 50%;
+                      left: 10px;
+                      transform: translateY(-50%);
+                    }
+                  </style>
+                  <p class="earning-question">
+                    Which is your Total Annual Gross Salary (before tax and deductions)?
+                    <span id="earning-input-wrapper">
+                      <input
+                        id="earning-input"
+                        type="number"
+                        pattern="[0-9]*"
+                        inputmode="numeric"
+                      />
+                    </span>
                   </p>
-                  <figure class="wp-block-image">
-                    <a
-                      href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa719991e-980a-4ebf-88dc-7f1eee55446b_1000x600.png"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      ><img
-                        decoding="async"
-                        class="lazyload"
-                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                        data-src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa719991e-980a-4ebf-88dc-7f1eee55446b_1000x600.png"
-                        alt="Berlin Salary Trends Survey Chart 15" /><noscript
-                        ><img
-                          decoding="async"
-                          class="lazyload"
-                          src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa719991e-980a-4ebf-88dc-7f1eee55446b_1000x600.png"
-                          alt="Berlin Salary Trends Survey Chart 15" /></noscript
-                    ></a>
-                    <figcaption class="wp-element-caption">
-                      Outliers above €200k were removed.
-                    </figcaption>
-                  </figure>
+                  <div id="earning-chart"></div>
                   <h2 class="wp-block-heading" id="total_gross">Total annual gross salary vs …</h2>
                   <p>TL;DR: box charts are f**king amazing.&nbsp;</p>
                   <blockquote class="wp-block-quote">
@@ -3601,6 +3611,7 @@
       data-wp-strategy="async"
     ></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/histogram-bellcurve.js"></script>
     <script src="./index.js"></script>
   </body>
 </html>

@@ -2,7 +2,6 @@ let data;
 let user = {};
 
 function addEventListeners() {
-  console.log("adding events");
   document.getElementsByName("working").forEach((element) => {
     element.addEventListener("change", function (event) {
       user.working = event.currentTarget.id;
@@ -12,17 +11,23 @@ function addEventListeners() {
 }
 
 function initData(newData) {
-  data = newData.map((row) => {
-    const physicallyInBerlin =
-      row["0. Are you currently employed in Berlin or by a Berlin-based organization?"] ==
-      "Yes, I'm physically working in Berlin.";
-    const workingRemotelyForBerlin =
-      row["0. Are you currently employed in Berlin or by a Berlin-based organization?"] ===
-      "Yes, I'm working remotely for a Berlin-based organization.";
-    return { ...row, physicallyInBerlin, workingRemotelyForBerlin };
-  });
+  data = newData
+    .map((row) => {
+      const physicallyInBerlin =
+        row["0. Are you currently employed in Berlin or by a Berlin-based organization?"] ==
+        "Yes, I'm physically working in Berlin.";
+      const workingRemotelyForBerlin =
+        row["0. Are you currently employed in Berlin or by a Berlin-based organization?"] ===
+        "Yes, I'm working remotely for a Berlin-based organization.";
+      const earning = parseInt(
+        row["15. Total annual gross salary in EUR (before taxes and deductions)"].replace(/\D/g, "")
+      );
+      return { ...row, physicallyInBerlin, workingRemotelyForBerlin, earning };
+    })
+    .filter((row) => row.physicallyInBerlin || row.workingRemotelyForBerlin);
   addEventListeners();
   renderRemoteChart();
+  renderEarningsHistogram();
 }
 
 fetch("./data.json")
@@ -100,5 +105,58 @@ function renderRemoteChart() {
 function updateRemoteChart() {
   remoteChart.update({
     series: getRemoteSeries(),
+  });
+}
+
+function renderEarningsHistogram() {
+  const buckets = [
+    {
+      name: "Less than 10k",
+      data: data.filter((row) => row.earning < 10_000).length,
+    },
+  ];
+  let prevBucket = buckets[0];
+  for (let n = 10; n < 200; n += 10) {
+    buckets.push({
+      name: `${n}k to ${n + 10}k`,
+      data: data.filter((row) => row.earning >= (n - 10) * 1_000 && row.earning < n * 1_000).length,
+    });
+  }
+  buckets.push({
+    name: "More than 200k",
+  });
+  Highcharts.chart("earning-chart", {
+    chart: {
+      type: "column",
+    },
+    title: {
+      text: "Distribution of salaries",
+    },
+    xAxis: {
+      categories: buckets.map((bucket) => bucket.name),
+      crosshair: true,
+      accessibility: {
+        description: "Yearly salary",
+      },
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: "Amount of respondants",
+      },
+    },
+    plotOptions: {
+      column: {
+        pointPadding: 0,
+        borderWidth: 0,
+        minPointLength: 2,
+      },
+    },
+    series: [
+      {
+        name: "Respondants",
+        data: buckets.map((bucket) => bucket.data),
+      },
+    ],
   });
 }
